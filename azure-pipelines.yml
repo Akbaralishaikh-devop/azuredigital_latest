@@ -27,6 +27,12 @@ steps:
     msbuildArgs: '/p:OutputPath=$(build.artifactstagingdirectory)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.sourcesdirectory)/D:\azurepaid_agent/bin/Release'
+    ArtifactName: '$(Parameters.ArtifactName)'
+  condition: succeededOrFailed()
 
 - task: VSTest@2
   inputs:
